@@ -4,7 +4,9 @@ defmodule RTP.Application do
 
   @impl true
   def start(_type, _args) do
+    
     children = [
+      
       %{
         id: Worker,
         start: {Worker, :start_link, [""]}
@@ -19,16 +21,17 @@ defmodule RTP.Application do
       },
       %{
         id: Connection1,
-        start: {Connection, :start_link, ["http://localhost:4000/tweets/2"]}
+        start: {Connection, :start_link, ["http://localhost:4000/tweets/1"]}
       },
       %{
         id: Connection2,
-        start: {Connection, :start_link, ["http://localhost:4000/tweets/1"]}
+        start: {Connection, :start_link, ["http://localhost:4000/tweets/2"]}
       }
 
     ]
 
     opts = [strategy: :one_for_one, name: RTP.Supervisor]
+    
     Supervisor.start_link(children, opts)
   end
 end

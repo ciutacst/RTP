@@ -1,10 +1,10 @@
 
-defmodule RTP.MixProject do
+defmodule RT.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :lab1,
+      app: :RTP,
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,

@@ -13,7 +13,7 @@ defmodule Router do
   @impl true
   def handle_cast({:router, Message}, _states) do
     WorkerSupervisor.start_worker(Message)
-    WorkerSupervisor.send_Message(Message)
+    GenServer.cast(Worker, {:worker, Message})
     {:noreply, %{}}
  end
 

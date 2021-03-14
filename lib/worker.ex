@@ -32,7 +32,7 @@ defmodule Worker do
 
   def calculate_sentiments(data) do
     user_words_array = data["text"]
-                       |> String.split(" ", trim: true)
+    |> String.split(" ", trim: true)
 
     scores_array = Enum.map(user_words_array, fn word -> EmotionValues.get_value(word) end)
     final_score = Enum.sum(scores_array)
