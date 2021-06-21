@@ -6,10 +6,20 @@ defmodule RTP.Application do
   def start(_type, _args) do
     
     children = [
+
+      %{
+        id: Sink,
+        start: {Sink, :start_link, [""]}
+      },
+
+      %{
+        id: EngWorker,
+        start: {EngWorker, :start_link, [""]}
+      },
       
       %{
-        id: Worker,
-        start: {Worker, :start_link, [""]}
+        id: EngagementSupervisor,
+        start: {EngagementSupervisor, :start_link, [""]}
       },
       %{
         id: Supervisor,
