@@ -16,16 +16,11 @@ defmodule Router do
 
     my_workers = Supervisor.addWorker(Message)
 
-    Enum.each(1..5, fn(_x) ->
-      Registry.register(MyRegistry, my_workers, keys: :unique)
-    end)
+    DynamicSupervisor.start_worker(message)
+    DynamicSupervisor.cast_message(message)
 
-    connections = Registry.lookup(MyRegistry)
-    next_index = RoundRobin.read_and_increment()
+    GenServer.cast(Sink, {:message, message})
 
-    {pid, _value = nil} = Enum.at(connections, rem(next_index, length(connections)))
-
-    GenServer.cast(pid, {:worker, Message})
     {:noreply, state}
   end
 

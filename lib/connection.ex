@@ -9,13 +9,14 @@ defmodule Connection do
       receive do
         Message -> GenServer.cast(Router, {:router, Message})
       end
+
       getMessage()
   end
 
  def child_spec(arg) do
    %{
-     id: Connection,
-     start: {Connection, :start_link, [arg]},
+     id: __MODULE__,
+     start: {__MODULE__, :start_link, [opts]},
      type: :worker,
      restart: :permanent,
      shutdown: 200

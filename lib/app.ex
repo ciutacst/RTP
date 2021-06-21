@@ -31,7 +31,6 @@ defmodule RTP.Application do
     ]
 
     opts = [strategy: :one_for_one, name: RTP.Supervisor]
-    
     Supervisor.start_link(children, opts)
   end
 end
