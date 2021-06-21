@@ -21,13 +21,15 @@ defmodule Worker do
       IO.inspect(%{"Panic message:" => Message})
       Process.exit(self(), :kill)
     else
-      data = json_parse(Message)
+      text = json_parse(Message)
     end
   end
 
   def json_parse(Message) do
       message_data = Jason.decode!(Message.data)
-      calculate_sentiments(message_data["message"]["tweet"])
+      calculate_sentiments(message_data["message"]["tweet"]["user"]["screen_name"])
+      sentiment = %{user: user, sentiment_score: message_data}
+      GenServer.cast(Sink, {:sentiment_score, sentiment})
   end
 
   def calculate_sentiments(data) do
