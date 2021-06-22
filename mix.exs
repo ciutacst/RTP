@@ -17,6 +17,7 @@ defmodule RT.MixProject do
     [
       extra_applications: [:logger],
       mod: {RTP.Application, []}
+      mod: {MessageBroker.Application, []}
     ]
   end
 

@@ -1,0 +1,32 @@
+version: "3.6"
+services:
+    mongo:
+        image: test
+        restart: always
+        ports:
+            - 27017:27017
+        container_name: test
+
+    server:
+        image : alexburlacu/rtp-server:faf18x
+        container_name: server
+        ports:
+            - 4000:4000
+        networks:
+            - default
+
+    elixir:
+        # image: elixir
+        build:
+            context: rtp_lab
+        depends_on:
+            - mongo
+            - server
+
+        command: tail -f /dev/null
+        networks:
+            - default
+
+networks:
+    default:
+        driver: "bridge"

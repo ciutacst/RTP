@@ -31,11 +31,11 @@ defmodule RTP.Application do
       },
       %{
         id: Connection1,
-        start: {Connection, :start_link, ["http://localhost:4000/tweets/1"]}
+        start: {Connection, :start_link, ["http://server:4000/tweets/1"]}
       },
       %{
         id: Connection2,
-        start: {Connection, :start_link, ["http://localhost:4000/tweets/2"]}
+        start: {Connection, :start_link, ["http://server:4000/tweets/2"]}
       }
 
     ]
