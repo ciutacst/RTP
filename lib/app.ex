@@ -13,6 +13,11 @@ defmodule RTP.Application do
       },
 
       %{
+        id: Backpressure,
+        start: {Backpressure, :start_link, [""]}
+      },
+
+      %{
         id: EngWorker,
         start: {EngWorker, :start_link, [""]}
       },
